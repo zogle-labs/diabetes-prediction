@@ -48,4 +48,4 @@ print(f"Number of files in the tar archive: {num_files}")
 print("First few files in the archive:", file_list[:5])
 
 # Combine the extracted files into a single CSV file
-combine_files_to_csv(extracted_folder='data/extracted/Diabetes-Data', output_csv='combined_data.csv')
+combine_files_to_csv(extracted_folder='data/extracted/Diabetes-Data', output_csv='data/raw/combined_data.csv')
