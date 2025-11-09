@@ -13,9 +13,15 @@ def extract_and_combine(file_path, extract_to_folder='data/extracted', output_cs
             print("No 'data-' files found in the extracted folder.")
             return
 
-        dataframes = [pd.read_csv(os.path.join(extract_to_folder, f), delimiter='\t', header=None) for f in file_names]
+        dataframes = []
+        for f in file_names:
+            df = pd.read_csv(os.path.join(extract_to_folder, f), delimiter='\t', header=None)
+            df.columns = ['Date', 'Time', 'Code', 'Value']
+            dataframes.append(df)
+        
         if dataframes:
-            pd.concat(dataframes, ignore_index=True).to_csv(output_csv, index=False)
+            combined_df = pd.concat(dataframes, ignore_index=True)
+            combined_df.to_csv(output_csv, index=False)
             print(f"Combined CSV file saved as: {output_csv}")
         else:
             print("No data files were combined.")
