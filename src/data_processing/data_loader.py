@@ -1,6 +1,7 @@
 import tarfile
 import os
 import pandas as pd
+import yaml
 
 def count_and_extract_files(file_path, extract_to_folder='data/extracted'):
     try:
@@ -13,7 +14,7 @@ def count_and_extract_files(file_path, extract_to_folder='data/extracted'):
     except Exception as e:
         return str(e), []
 
-def combine_files_to_csv(extracted_folder='data/extracted/Diabetes-Data', output_csv='combined_data.csv'):
+def combine_files_to_csv(extracted_folder='../data/extracted/Diabetes-Data', output_csv='combined_data.csv'):
     try:
         file_names = [f for f in os.listdir(extracted_folder) if f.startswith('data-')]
         if not file_names:
@@ -39,13 +40,10 @@ def combine_files_to_csv(extracted_folder='data/extracted/Diabetes-Data', output
         
     except Exception as e:
         print(f"Error occurred during file combination: {str(e)}")
-
+   
 
 file_path = 'data/raw/diabetes-data.tar'
 num_files, file_list = count_and_extract_files(file_path)
-
-print(f"Number of files in the tar archive: {num_files}")
-print("First few files in the archive:", file_list[:5])
 
 # Combine the extracted files into a single CSV file
 combine_files_to_csv(extracted_folder='data/extracted/Diabetes-Data', output_csv='data/raw/combined_data.csv')
